@@ -11,6 +11,7 @@ import io.github.danildzambrana.guilib.handlers.TypingHandler;
 import io.github.danildzambrana.guilib.holder.PaginatedHolder;
 import io.github.danildzambrana.guilib.holder.SingleHolder;
 import org.bukkit.Material;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
@@ -26,6 +27,7 @@ public class GUILib {
         manager.registerEvents(new PaginatedHandler(), plugin);
         manager.registerEvents(new SinglePageHandler(), plugin);
         manager.registerEvents(new TypingHandler(), plugin);
+        ConfigurationSerialization.registerClass(Button.class);
     }
 
     public static GUILib getInstance(Plugin plugin, @NotNull PluginManager manager) {

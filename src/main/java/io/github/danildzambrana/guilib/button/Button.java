@@ -1,14 +1,19 @@
 package io.github.danildzambrana.guilib.button;
 
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.SerializableAs;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
-
-public class Button extends ItemStack implements Cloneable {
+@SerializableAs("Button")
+public class Button extends ItemStack implements Cloneable, ConfigurationSerializable {
     private final List<ClickAction> leftClickActions = new ArrayList<>();
     private final List<ClickAction> rightClickActions = new ArrayList<>();
     private final List<ClickAction> middleClickActions = new ArrayList<>();
@@ -24,8 +29,12 @@ public class Button extends ItemStack implements Cloneable {
         this.itemStack = itemStack;
     }
 
-    public Button(Button baseButton) {
+    public Button(@NotNull Button baseButton) {
         this.itemStack = baseButton.getItemStack();
+    }
+
+    public Button(@NotNull Map<String, Object> map){
+        this.itemStack = (ItemStack) map.get("itemStack");
     }
 
 
@@ -155,6 +164,14 @@ public class Button extends ItemStack implements Cloneable {
         itemStack.setItemMeta(meta);
 
         return this;
+    }
+
+    @Override
+    public Map<String, Object> serialize() {
+        Map<String, Object> map = new LinkedHashMap<>();
+
+        map.put("itemStack", itemStack.serialize());
+        return super.serialize();
     }
 }
 
