@@ -21,7 +21,10 @@ import java.util.Map;
 
 public class SinglePageMenuExample implements Menu {
     private final GUILib gui;
-    private Button sayHelloButton, sayBayButton, openOtherInventoryButton, inputTextButton;
+    private Button sayHelloButton,
+                sayBayButton,
+                openOtherInventoryButton,
+                inputTextButton;
     private final MenuManager menuManager;
 
     public SinglePageMenuExample(Plugin plugin, PluginManager pluginManager, MenuManager menuManager) {
