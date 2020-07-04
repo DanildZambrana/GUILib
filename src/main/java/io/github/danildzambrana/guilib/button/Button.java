@@ -34,7 +34,7 @@ public class Button extends ItemStack implements Cloneable, ConfigurationSeriali
     }
 
     public Button(@NotNull Map<String, Object> map){
-        this.itemStack = (ItemStack) map.get("itemStack");
+        this.itemStack = ItemStack.deserialize((Map<String, Object>) map.get("itemStack"));
     }
 
 
@@ -171,7 +171,7 @@ public class Button extends ItemStack implements Cloneable, ConfigurationSeriali
         Map<String, Object> map = new LinkedHashMap<>();
 
         map.put("itemStack", itemStack.serialize());
-        return super.serialize();
+        return map;
     }
 }
 
