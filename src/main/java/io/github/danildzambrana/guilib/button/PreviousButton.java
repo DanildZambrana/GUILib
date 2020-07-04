@@ -8,10 +8,12 @@ public class PreviousButton extends Button {
 
     public PreviousButton(ItemStack itemStack, String name) {
         super(itemStack, name);
+        initialize();
     }
 
     public PreviousButton(Button baseButton) {
         super(baseButton);
+        initialize();
     }
 
     private void initialize() {
