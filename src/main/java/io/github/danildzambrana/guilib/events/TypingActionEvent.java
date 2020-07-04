@@ -30,6 +30,18 @@ public class TypingActionEvent extends Event implements Cancellable {
         this.cancelled = cancel;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public TypingData getData() {
+        return data;
+    }
+
     @Override
     public HandlerList getHandlers() {
         return handlerList;
