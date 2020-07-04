@@ -3,7 +3,6 @@ package io.github.danildzambrana.guilib.holder;
 import io.github.danildzambrana.guilib.button.Button;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.InventoryHolder;
 
 import java.util.HashMap;
 import java.util.Map;
