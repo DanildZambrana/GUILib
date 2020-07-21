@@ -45,6 +45,8 @@ public abstract class BaseHolder implements InventoryHolder {
     }
 
     public void executeClose(InventoryCloseEvent event) {
-        this.onClose.accept(event);
+        if (this.onClose != null) {
+            this.onClose.accept(event);
+        }
     }
 }
