@@ -10,6 +10,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class PaginatedHolder extends BaseHolder implements InventoryHolder {
 
@@ -30,7 +31,9 @@ public class PaginatedHolder extends BaseHolder implements InventoryHolder {
     public Inventory getInventory() {
         Inventory inventory = Bukkit.createInventory(this, 54, super.getTitle());
 
-        super.getButtonMap().forEach(inventory::setItem);
+        for (Map.Entry<Integer, Button> entry : super.getButtonMap().entrySet()) {
+            inventory.setItem(entry.getKey(),  entry.getValue().getItemStack());
+        }
         return inventory;
     }
 
