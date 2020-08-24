@@ -30,27 +30,29 @@ public class MenuHandler {
             return;
         }
 
-        for (ClickAction leftClickAction : button.getLeftClickActions()) {
-            try {
-                leftClickAction.execute(event);
-            } catch (ClickActionException e) {
-                e.printStackTrace();
+        if (event.getClick().isLeftClick()) {
+            for (ClickAction leftClickAction : button.getLeftClickActions()) {
+                try {
+                    leftClickAction.execute(event);
+                } catch (ClickActionException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-
-        for (ClickAction rightClickAction : button.getRightClickActions()) {
-            try {
-                rightClickAction.execute(event);
-            } catch (ClickActionException e) {
-                e.printStackTrace();
+        } else if (event.getClick().isRightClick()) {
+            for (ClickAction rightClickAction : button.getRightClickActions()) {
+                try {
+                    rightClickAction.execute(event);
+                } catch (ClickActionException e) {
+                    e.printStackTrace();
+                }
             }
-        }
-
-        for (ClickAction middleClickAction : button.getMiddleClickActions()) {
-            try {
-                middleClickAction.execute(event);
-            } catch (ClickActionException e) {
-                e.printStackTrace();
+        } else if (event.getClick().isCreativeAction()) {
+            for (ClickAction middleClickAction : button.getMiddleClickActions()) {
+                try {
+                    middleClickAction.execute(event);
+                } catch (ClickActionException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
