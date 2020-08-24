@@ -66,33 +66,38 @@ public class GUILib {
     }
 
     public PaginatedHolder createPaginatedMenu(@NotNull List<Button> buttons) {
-        double inventorySize = 46;
-        int pagesSize = 0;
+        final double inventorySize = 45;
+        int pages;
 
-        double pages = buttons.size() / inventorySize;
+        if (buttons.size() <= 46) {
+            pages = 1;
+        } else {
+            int remaining = buttons.size() % 46;
+            pages = (buttons.size() - remaining) / 46;
 
-        if (pages - Math.floor(pages) < 1 && pages - Math.floor(pages) > 0) {
-            pagesSize++;
+            if (remaining > 0) {
+                pages++;
+            }
         }
-        pagesSize += Math.floor(pages);
-
-        Iterator<Button> buttonIterable = buttons.iterator();
-        PaginatedHolder previous = new PaginatedHolder("1/" + pagesSize, true, null, null);
-        for (int i = 0; i < pagesSize; i++) {
-            String title = (i + 1) + "/" + pagesSize;
+        Iterator<Button> buttonIterator = buttons.iterator();
+        PaginatedHolder previous = null;
+        for (int i = 0; i < pages; i++) {
+            String title = (i + 1) + "/" + pages;
             PaginatedHolder holder = new PaginatedHolder(title, true, previous, null);
 
-            for (int x = 0; (x < inventorySize) && buttonIterable.hasNext(); x++) {
-                holder.setButton(x, buttonIterable.next());
+            for (int x = 0; (x < inventorySize) && buttonIterator.hasNext(); x++) {
+                holder.setButton(x, buttonIterator.next());
             }
-
-            previous.setNextPage(holder);
+            if (previous != null) {
+                previous.setNextPage(holder);
+            }
             previous = holder;
         }
 
-        while (previous.getPreviousPage() != null) {
+        while (previous != null && previous.getPreviousPage() != null) {
             previous = previous.getPreviousPage();
         }
+
         return previous;
     }
 

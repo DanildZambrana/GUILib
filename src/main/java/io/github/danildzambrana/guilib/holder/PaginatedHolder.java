@@ -31,6 +31,7 @@ public class PaginatedHolder extends BaseHolder implements InventoryHolder {
     public Inventory getInventory() {
         Inventory inventory = Bukkit.createInventory(this, 54, super.getTitle());
 
+        loadButtonBar();
         for (Map.Entry<Integer, Button> entry : super.getButtonMap().entrySet()) {
             inventory.setItem(entry.getKey(),  entry.getValue().getItemStack());
         }
