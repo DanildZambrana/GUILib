@@ -3,6 +3,8 @@ package io.github.danildzambrana.guilib.holder;
 import io.github.danildzambrana.guilib.button.Button;
 import io.github.danildzambrana.guilib.button.NextButton;
 import io.github.danildzambrana.guilib.button.PreviousButton;
+import io.github.danildzambrana.guilib.exceptions.MenuException;
+import io.github.danildzambrana.guilib.exceptions.MinOrMaxNumberException;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -24,7 +26,6 @@ public class PaginatedHolder extends BaseHolder implements InventoryHolder {
         super(54, title, new HashMap<>(), blockAllSlots);
         this.previousPage = previousPage;
         this.nextPage = nextPage;
-        loadButtonBar();
     }
 
     @Override
@@ -76,5 +77,17 @@ public class PaginatedHolder extends BaseHolder implements InventoryHolder {
 
     public void setNextPage(PaginatedHolder nextPage) {
         this.nextPage = nextPage;
+    }
+
+    public static void setButton(PaginatedHolder holder, Button button, int slot) throws MenuException {
+        if (slot < 1 || slot > 7) {
+            throw new MinOrMaxNumberException("The number must be greater than 0 and less than or equal to 7");
+        }
+        PaginatedHolder current = holder;
+
+        while (current.getNextPage() != null) {
+            current.setButton(45 + slot, button);
+            current = current.getNextPage();
+        }
     }
 }
